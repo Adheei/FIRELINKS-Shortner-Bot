@@ -10,14 +10,11 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultArticle, InputTextMessageContent
 from pyshorteners import Shortener
 
-BITLY_API = os.environ.get("BITLY_API", "")
-CUTTLY_API = os.environ.get("CUTTLY_API", "")
-SHORTCM_API = os.environ.get("SHORTCM_API", "")
-GPLINKS_API = os.environ.get("GPLINKS_API", "")
+FIRELINKS_API = os.environ.get("FIRELINKS_API", "4b4ee8f8717d775262ef74432e202b8be8597b62")
 
 BUTTONS = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton(text='⚙ Join Updates Channel ⚙', url='https://telegram.me/trtechguide')
+        InlineKeyboardButton(text='⚙ Join Updates Channel ⚙', url='https://telegram.me/Lmcbots')
         ]]
     )
 
@@ -58,125 +55,18 @@ async def inline_short(bot, update):
 
 async def short(link):
     shorten_urls = "**--Shorted URLs--**\n"
-    
-    # Bit.ly shorten
-    if BITLY_API:
-        try:
-            s = Shortener(api_key=BITLY_API)
-            url = s.bitly.short(link)
-            shorten_urls += f"\n**Bit.ly :-** {url}"
-        except Exception as error:
-            print(f"Bit.ly error :- {error}")
-    
-    # Chilp.it shorten
+  
+    # FireLinks shorten
     try:
-        s = Shortener()
-        url = s.chilpit.short(link)
-        shorten_urls += f"\n**Chilp.it :-** {url}"
-    except Exception as error:
-        print(f"Chilp.it error :- {error}")
-    
-    # Clck.ru shorten
-    try:
-        s = Shortener()
-        url = s.clckru.short(link)
-        shorten_urls += f"\n**Clck.ru :-** {url}"
-    except Exception as error:
-        print(f"Click.ru error :- {error}")
-    
-    # Cutt.ly shorten
-    if CUTTLY_API:
-        try:
-            s = Shortener(api_key=CUTTLY_API)
-            url = s.cuttly.short(link)
-            shorten_urls += f"\n**Cutt.ly :-** {url}"
-        except Exception as error:
-            print(f"Cutt.ly error :- {error}")
-    
-    # Da.gd shorten
-    try:
-        s = Shortener()
-        url = s.dagd.short(link)
-        shorten_urls += f"\n**Da.gd :-** {url}"
-    except Exception as error:
-        print(f"Da.gd error :- {error}")
-    
-    # Is.gd shorten
-    try:
-        s = Shortener()
-        url = s.isgd.short(link)
-        shorten_urls += f"\n**Is.gd :-** {url}"
-    except Exception as error:
-        print(f"Is.gd error :- {error}")
-    
-    # Osdb.link shorten
-    try:
-        s = Shortener()
-        url = s.osdb.short(link)
-        shorten_urls += f"\n**Osdb.link :-** {url}"
-    except Exception as error:
-        print(f"Osdb.link error :- {error}")
-    
-    # Ow.ly shorten
-    try:
-        s = Shortener()
-        url = s.owly.short(link)
-        shorten_urls += f"\n**Ow.ly :-** {url}"
-    except Exception as error:
-        print(f"Ow.ly error :- {error}")
-    
-    # Po.st shorten
-    try:
-        s = Shortener()
-        url = s.post.short(link)
-        shorten_urls += f"\n**Po.st :-** {url}"
-    except Exception as error:
-        print(f"Po.st error :- {error}")
-    
-    # Qps.ru shorten
-    try:
-        s = Shortener()
-        url = s.qpsru.short(link)
-        shorten_urls += f"\n**Qps.ru :-** {url}"
-    except Exception as error:
-        print(f"Qps.ru error :- {error}")
-    
-    # Short.cm shorten
-    if SHORTCM_API:
-        try:
-            s = Shortener(api_key=SHORTCM_API)
-            url = s.shortcm.short(link)
-            shorten_urls += f"\n**Short.cm :-** {url}"
-        except Exception as error:
-            print(f"Short.cm error :- {error}")
-    
-    # TinyURL.com shorten
-    try:
-        s = Shortener()
-        url = s.tinyurl.short(link)
-        shorten_urls += f"\n**TinyURL.com :-** {url}"
-    except Exception as error:
-        print(f"TinyURL.com error :- {error}")
-    
-    # NullPointer shorten
-    try:
-        s = Shortener(domain='https://0x0.st')
-        url = s.nullpointer.short(link)
-        shorten_urls += f"\n**0x0.st :-** {url}"
-    except Exception as error:
-        print(f"NullPointer error :- {error}")
-    
-    # GPLinks shorten
-    try:
-        api_url = "https://gplinks.in/api"
-        params = {'api': GPLINKS_API, 'url': link}
+        api_url = "https://fire-links.in/api"
+        params = {'api': FIRELINKS_API, 'url': link}
         async with aiohttp.ClientSession() as session:
             async with session.get(api_url, params=params, raise_for_status=True) as response:
                 data = await response.json()
                 url = data["shortenedUrl"]
-                shorten_urls += f"\n**GPLinks.in :-** {url}"
+                shorten_urls += f"\n**fire-Links.in :-** {url}"
     except Exception as error:
-        print(f"GPLink error :- {error}")
+        print(f"FireLinks error :- {error}")
     
     # Send the text
     try:
